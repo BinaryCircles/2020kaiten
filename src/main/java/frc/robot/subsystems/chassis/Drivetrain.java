@@ -20,18 +20,15 @@ public class Drivetrain extends SubsystemBase {
   private final CANSparkMax front_left, back_left, front_right, back_right;
   //private final WPI_TalonSRX front_left, front_right;
   //private final WPI_VictorSPX back_left, back_right;
-  private final CANSparkMaxLowLevel.MotorType brushless;
   private final boolean driveInverted;
-  private final int currentLimitAmps;
   private final DifferentialDrive differentialDrive;
 
   // constructor
   public Drivetrain() {
 
     // configuration constants
-    brushless = CANSparkMaxLowLevel.MotorType.kBrushless;
+    CANSparkMaxLowLevel.MotorType brushless = CANSparkMaxLowLevel.MotorType.kBrushless;
     driveInverted = false;
-    currentLimitAmps = 40;
 
     // instantiate motor controllers (spark maxes)
     front_left = new CANSparkMax(Constants.Drivetrain.drive_fl, brushless);
@@ -61,10 +58,10 @@ public class Drivetrain extends SubsystemBase {
     back_left.setSafetyEnabled(false);
     back_right.setSafetyEnabled(false);*/
 
-    front_left.setSmartCurrentLimit(currentLimitAmps);
-    back_left.setSmartCurrentLimit(currentLimitAmps);
-    front_right.setSmartCurrentLimit(currentLimitAmps);
-    back_right.setSmartCurrentLimit(currentLimitAmps);
+    front_left.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
+    back_left.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
+    front_right.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
+    back_right.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
 
   }
 
