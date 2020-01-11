@@ -37,8 +37,6 @@ public class RobotContainer {
   public static Chassis s_chassis;
   public static Flywheel s_flywheel;
 
-  public static cameraSubSystem s_camera;
-
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   public static final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
