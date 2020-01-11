@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Chassis extends SubsystemBase {
 
-  public Chassis() {
+  public Drivetrain drivetrain;
 
+  public Chassis() {
+    drivetrain = new Drivetrain();
   }
 
   @Override
