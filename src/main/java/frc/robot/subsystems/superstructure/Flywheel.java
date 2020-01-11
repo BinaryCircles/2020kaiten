@@ -9,6 +9,8 @@ package frc.robot.subsystems.superstructure;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,7 +18,7 @@ public class Flywheel extends SubsystemBase {
 
   // define variables
   private final CANSparkMax flywheelMain, flywheelSecondary;
-
+  private final PIDController pidController; 
   // constructor
   public Flywheel() {
 
@@ -30,13 +32,16 @@ public class Flywheel extends SubsystemBase {
     // configure motor controllers
     flywheelMain.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
     flywheelSecondary.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
-
     flywheelSecondary.follow(flywheelMain);
 
+    // PIDController doesn't have a constructor that takes F, we just add that ourselves.
+    pidController = new PIDController(Constants.FLYWHEEL_P, Constants.FLYWHEEL_I, 
+      Constants.FLYWHEEL_D);
   }
 
   public void shoot() {
-    flywheelMain.set(Constants.FLYWHEEL_SPEED);
+    // Set the flywheel's speed based on the target velocity
+    flywheelMain.set(pidController.calculate(flywheelMain.getEncoder().getVelocity(), Constants.FLYWHEEL_SPEED));
   }
 
   public void stop() {
