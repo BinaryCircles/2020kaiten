@@ -31,10 +31,11 @@ public final class Constants {
     public static final int FLYWHEEL_SPEED = 60; 
 
     // PID Constants for closed loop flywheel
-    public static final double FLYWHEEL_P = 1;
-    public static final double FLYWHEEL_I = 0;
-    public static final double FLYWHEEL_D = 0;
-    public static final double FLYWHEEL_F = 0;
+    public static final double FLYWHEEL_kP = 1;
+    public static final double FLYWHEEL_kI = 0;
+    public static final double FLYWHEEL_kD = 0;
+    public static final double FLYWHEEL_kF = 0;
+    public static final double FLYWHEEL_kA = 0;
 
 
     // controller IDs
