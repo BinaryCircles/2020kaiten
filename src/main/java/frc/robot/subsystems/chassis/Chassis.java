@@ -5,14 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.subsystems.chassis;
 
-public final class Constants {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-    // drivetrain
-    public static final int drive_fl = 5;
-    public static final int drive_fr = 1;
-    public static final int drive_bl = 4;
-    public static final int drive_br = 8;
+public class Chassis extends SubsystemBase {
 
+  public Drivetrain drivetrain;
+
+  public Chassis() {
+    drivetrain = new Drivetrain();
+  }
+
+  @Override
+  public void periodic() {
+
+  }
 }
