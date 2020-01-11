@@ -27,8 +27,15 @@ public final class Constants {
     // flywheel current limiting
     public static final int CURRENT_LIMIT_AMPS_FLYWHEEL = 40;
 
-    // flywheel speed
-    public static final int FLYWHEEL_SPEED = 1;
+    // flywheel speed is measured in rotations per minute.
+    public static final int FLYWHEEL_SPEED = 60; 
+
+    // PID Constants for closed loop flywheel
+    public static final double FLYWHEEL_P = 1;
+    public static final double FLYWHEEL_I = 0;
+    public static final double FLYWHEEL_D = 0;
+    public static final double FLYWHEEL_F = 0;
+
 
     // controller IDs
     public static final int DRIVE_CONTROLLER_PORT = 1;
