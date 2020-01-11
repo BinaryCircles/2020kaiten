@@ -43,7 +43,7 @@ public class Flywheel extends SubsystemBase {
     // Set the flywheel's speed based on the target velocity
     double velocity = flywheelMain.getEncoder().getVelocity();
     flywheelMain.set(pidController.calculate(velocity, Constants.FLYWHEEL_SPEED)
-      + Constants.FLYWHEEL_kF * velocity);
+      + Constants.FLYWHEEL_kF * Constants.FLYWHEEL_SPEED);
   }
 
   public void stop() {
