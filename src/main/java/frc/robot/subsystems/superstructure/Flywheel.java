@@ -10,6 +10,10 @@ package frc.robot.subsystems.superstructure;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,7 +22,9 @@ public class Flywheel extends SubsystemBase {
   // define variables
   private final TalonSRX flywheelMain;
   private final VictorSPX flywheelSecondary;
-  
+
+  private final PIDController pidController;
+
   // constructor
   public Flywheel() {
 
@@ -45,10 +51,18 @@ public class Flywheel extends SubsystemBase {
   }
 
   public void shoot() {
-    // set the flywheel's speed using the talon's built in PID controller
-    // it requires it to be in ticks per 100 milliseconds
-    flywheelMain.set(ControlMode.Velocity, Constants.FLYWHEEL_SPEED * Constants.FLYWHEEL_TICKS_PER_ROTATION
-       * Constants.FLYWHEEL_SETPOINT_CONSTANT);
+    flywheelMain.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
+    flywheelSecondary.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
+    flywheelSecondary.follow(flywheelMain);
+
+    // PIDController doesn't have a constructor that takes F, we just add that ourselves.
+    pidController = new PIDController(Constants.FLYWHEEL_P, Constants.FLYWHEEL_I,
+      Constants.FLYWHEEL_D);
+  }
+
+  public void shoot() {
+    // set the flywheel's speed based on the target velocity
+    flywheelMain.set(pidController.calculate(flywheelMain.getEncoder().getVelocity(), Constants.FLYWHEEL_SPEED));
   }
 
   public void stop() {
