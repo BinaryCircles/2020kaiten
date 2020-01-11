@@ -15,12 +15,14 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.chassis.Chassis;
 import frc.robot.subsystems.superstructure.Flywheel;
+import frc.robot.subsystems.superstructure.Intake;
 
 public class RobotContainer {
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Chassis s_chassis;
   public static Flywheel s_flywheel;
+  public static Intake s_intake;
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
@@ -30,6 +32,7 @@ public class RobotContainer {
   public RobotContainer() {
     s_chassis = new Chassis();
     s_flywheel = new Flywheel();
+    s_intake = new Intake();
 
     configureButtonBindings();
   }
@@ -37,11 +40,15 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // create inline command to shoot/stop shooting
-    new JoystickButton(operatorController, XboxController.Button.kX.value).whenPressed(s_flywheel::shoot)
+    new JoystickButton(operatorController, XboxController.Button.kX.value)
+            .whenPressed(s_flywheel::shoot)
             .whenReleased(s_flywheel::stop);
-
-
+    // inline command for activate/deactivate intake
+    new JoystickButton(operatorController,XboxController.Button.kY.value)
+            .whenPressed(s_intake::startEat)
+            .whenReleased(s_intake::stopEat);
   }
+
 
   public static double getTriggerOutput(XboxController controller) {
     return Math.pow(controller.getTriggerAxis(GenericHID.Hand.kRight) - controller.getTriggerAxis(GenericHID.Hand.kLeft), 3);

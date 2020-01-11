@@ -19,6 +19,13 @@ public final class Constants {
     public static final int FLYWHEEL_MAIN = 2;
     public static final int FLYWHEEL_SECONDARY = 3;
 
+    //intake
+    public static final int INTAKE_MAIN = 6;
+
+    //pneumatic
+    public static final int INTAKE_ARM_FRONT = 11;
+    public static final int INTAKE_ARM_BACK = 12;
+
     // drivetrain current limiting
     public static final int CURRENT_LIMIT_AMPS_DRIVE = 40;
 
@@ -27,6 +34,9 @@ public final class Constants {
 
     // flywheel speed
     public static final int FLYWHEEL_SPEED = 1;
+
+    // intake speed
+    public static final int INTAKE_SPEED = 1;
 
     // controller IDs
     public static final int DRIVE_CONTROLLER_PORT = 1;
