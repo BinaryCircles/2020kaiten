@@ -35,13 +35,15 @@ public class Flywheel extends SubsystemBase {
     flywheelSecondary.follow(flywheelMain);
 
     // PIDController doesn't have a constructor that takes F, we just add that ourselves.
-    pidController = new PIDController(Constants.FLYWHEEL_P, Constants.FLYWHEEL_I, 
-      Constants.FLYWHEEL_D);
+    pidController = new PIDController(Constants.FLYWHEEL_kP, Constants.FLYWHEEL_kI, 
+      Constants.FLYWHEEL_kD);
   }
 
   public void shoot() {
     // Set the flywheel's speed based on the target velocity
-    flywheelMain.set(pidController.calculate(flywheelMain.getEncoder().getVelocity(), Constants.FLYWHEEL_SPEED));
+    double velocity = flywheelMain.getEncoder().getVelocity();
+    flywheelMain.set(pidController.calculate(velocity, Constants.FLYWHEEL_SPEED)
+      + Constants.FLYWHEEL_kF * velocity);
   }
 
   public void stop() {
