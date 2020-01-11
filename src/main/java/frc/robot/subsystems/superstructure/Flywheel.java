@@ -51,18 +51,10 @@ public class Flywheel extends SubsystemBase {
   }
 
   public void shoot() {
-    flywheelMain.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
-    flywheelSecondary.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_FLYWHEEL);
-    flywheelSecondary.follow(flywheelMain);
-
-    // PIDController doesn't have a constructor that takes F, we just add that ourselves.
-    pidController = new PIDController(Constants.FLYWHEEL_P, Constants.FLYWHEEL_I,
-      Constants.FLYWHEEL_D);
-  }
-
-  public void shoot() {
-    // set the flywheel's speed based on the target velocity
-    flywheelMain.set(pidController.calculate(flywheelMain.getEncoder().getVelocity(), Constants.FLYWHEEL_SPEED));
+    // Set the flywheel's speed based on the target velocity
+    double velocity = flywheelMain.getEncoder().getVelocity();
+    flywheelMain.set(pidController.calculate(velocity, Constants.FLYWHEEL_SPEED)
+      + Constants.FLYWHEEL_kF * velocity);
   }
 
   public void stop() {
