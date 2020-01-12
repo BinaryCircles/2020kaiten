@@ -31,12 +31,12 @@ public class Intake extends SubsystemBase {
 
   }
 
-  public void startEat() {
+  public void startVore() {
     intakeArm.set(DoubleSolenoid.Value.kForward);
     intake.set(Constants.INTAKE_SPEED);
   }
 
-  public void stopEat() {
+  public void stopVore() {
     intakeArm.set(DoubleSolenoid.Value.kReverse);
     intake.set(0);
   }

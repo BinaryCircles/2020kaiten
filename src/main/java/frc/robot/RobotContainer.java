@@ -45,8 +45,8 @@ public class RobotContainer {
             .whenReleased(s_flywheel::stop);
     // inline command for activate/deactivate intake
     new JoystickButton(operatorController,XboxController.Button.kY.value)
-            .whenPressed(s_intake::startEat)
-            .whenReleased(s_intake::stopEat);
+            .whenPressed(s_intake::startVore)
+            .whenReleased(s_intake::stopVore);
   }
 
 
