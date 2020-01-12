@@ -32,12 +32,15 @@ public class Climb extends ProfiledPIDSubsystem {
   private double lastError;
   private double error;
   private double diffError;
+  ProfiledPIDController controller;
+  private final ArmFeedforward climbArmFeedForward;
 
   // constructor
   public Climb()  {
-    super( new ProfiledPIDController(Constants.ARM_kP, Constants.ARM_kI, Constants.ARM_kD,
+    super(new ProfiledPIDController(Constants.ARM_kP, Constants.ARM_kI, Constants.ARM_kD,
             new TrapezoidProfile.Constraints(Constants.MAX_VELOCITY_RAD_PER_SEC, Constants.MAX_ACCEL)), 0);
-
+    controller = new ProfiledPIDController(Constants.ARM_kP, Constants.ARM_kI, Constants.ARM_kD,
+            new TrapezoidProfile.Constraints(Constants.MAX_VELOCITY_RAD_PER_SEC, Constants.MAX_ACCEL));
     // define the motor controllers
     deployTalon = new WPI_TalonSRX(Constants.DEPLOY_TALON);
     deployVictor = new WPI_VictorSPX(Constants.DEPLOY_VICTOR);
@@ -51,6 +54,8 @@ public class Climb extends ProfiledPIDSubsystem {
     // initialize encoder
     climbArmEncoder = new Encoder(Constants.CLIMB_DEPLOY_DIO, Constants.CLIMB_DEPLOY_DIO2);
 
+    // initialize feedforward
+    climbArmFeedForward = new ArmFeedforward(Constants.kS, Constants.kV, Constants.kA);
 
     // set dpp of encoder
     climbArmEncoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
@@ -60,6 +65,7 @@ public class Climb extends ProfiledPIDSubsystem {
     diffError = 0;
   }
 
+  /* Basic PID loop
   public void climbArmDeployPID(double input) {
     while(Math.abs(error) > 5) {
       error = input - climbArmEncoder.get();
@@ -68,11 +74,19 @@ public class Climb extends ProfiledPIDSubsystem {
       deployTalon.set(output);
       lastError = error;
     }
-  }
+  } */
 
   public void calculateInput(double input) {
     double output = (Math.asin(input/(Constants.CLIMB_ARM_LENGTH_1 + Constants.CLIMB_ARM_LENGTH_2)));
-    climbArmDeployPID(output);
+    goToSetpoint(output);
+  }
+
+  // theoretically the way to apply the ProfiledPIDController
+  public void goToSetpoint(double goalPose) {
+    double calculateChange = controller.calculate(climbArmEncoder.getDistance(), goalPose);
+    double climbFF = climbArmFeedForward.calculate(controller.getSetpoint().position,
+            controller.getSetpoint().velocity);
+    deployTalon.setVoltage(calculateChange + climbFF);
   }
 
   @Override
@@ -89,7 +103,7 @@ public class Climb extends ProfiledPIDSubsystem {
 
   public void startDeployClimbArm() {
     deployTalon.set(Constants.DEPLOY_SPEED);
-  }
+}
 
   public void stopDeployClimbArm() {
     deployTalon.set(0);
