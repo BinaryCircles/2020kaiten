@@ -39,16 +39,17 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    // create inline command to shoot/stop shooting
+    // inline command to shoot/stop shooting
     new JoystickButton(operatorController, XboxController.Button.kX.value)
             .whenPressed(s_flywheel::shoot)
             .whenReleased(s_flywheel::stop);
-    // inline command for activate/deactivate intake
-    new JoystickButton(operatorController,XboxController.Button.kY.value)
+
+    // inline command to deploy/undeploy intake
+    new JoystickButton(operatorController, XboxController.Button.kY.value)
             .whenPressed(s_intake::startVore)
             .whenReleased(s_intake::stopVore);
-  }
 
+  }
 
   public static double getTriggerOutput(XboxController controller) {
     return Math.pow(controller.getTriggerAxis(GenericHID.Hand.kRight) - controller.getTriggerAxis(GenericHID.Hand.kLeft), 3);
