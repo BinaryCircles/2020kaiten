@@ -29,7 +29,7 @@ public final class Constants {
     public static final int CLIMB_DEPLOY_DIO = 1;
     public static final int CLIMB_DEPLOY_DIO2 = 2;
 
-    // climb PID constants
+    // climb PID constants (need to be tuned)
     public static final int ARM_kF_GRAV = 0;
     public static final int ARM_kP = 0;
     public static final int ARM_kI = 0;
@@ -51,7 +51,7 @@ public final class Constants {
     public static final double kV = 0.0;
     public static final double kA = 0.0;
 
-    // climb arm lengths
+    // climb arm lengths (need to be updated)
     public static final double CLIMB_ARM_LENGTH_1 = 69;
     public static final double CLIMB_ARM_LENGTH_2 = 420;
 
