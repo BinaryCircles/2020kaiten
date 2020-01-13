@@ -37,6 +37,8 @@ public class RobotContainer {
   public static Chassis s_chassis;
   public static Flywheel s_flywheel;
 
+  public static cameraSubSystem s_camera;
+
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   public static final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
@@ -55,6 +57,10 @@ public class RobotContainer {
     new JoystickButton(operatorController, XboxController.Button.kX.value)
             .whenPressed(s_flywheel::shoot)
             .whenReleased(s_flywheel::stop);
+
+    new JoystickButton(driveController, XboxController.Button.kX.value)
+            .whenPressed(s_camera::set_camera2)
+            .whenReleased(s_camera::set_camera1);
 
     new JoystickButton(driveController, XboxController.Button.kX.value)
             .whenPressed(s_camera::set_camera2)
@@ -113,6 +119,7 @@ public class RobotContainer {
             s_chassis::getWheelSpeeds,
             new PIDController(Constants.Drivetrain.kPVel, 0, 0),
             new PIDController(Constants.Drivetrain.kPVel, 0, 0)
+            
             // return the volts
             s_chassis::tankDriveVolts,
             s_chassis

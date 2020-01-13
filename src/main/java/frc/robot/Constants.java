@@ -88,7 +88,7 @@ public final class Constants {
 
         // We need this because the talon has different PID slots
         public static final int kPIDLoopIdx = 0;
-        
+
         // Don't try to tune these! These are constants that are
         // stated in the documentation so that we can easily enter
         // rotaitons per minute.
@@ -103,12 +103,10 @@ public final class Constants {
         public static final double kA = 0;
         /**
          * Timeout value (in milliseconds) generally used in parameter configs
-         * Non-zero to block the config until success, zero to skip checking 
+         * Non-zero to block the config until success, zero to skip checking
          */
         public static final int CONFIG_TIMEOUT = 30;
     }
-    // flywheel
-
 
     // drivetrain current limiting
     public static final int CURRENT_LIMIT_AMPS_DRIVE = 40;
@@ -116,8 +114,10 @@ public final class Constants {
     // controller IDs
     public static final int DRIVE_CONTROLLER_PORT = 1;
     public static final int OPERATOR_CONTROLLER_PORT = 2;
-	
 
+    //camera
+    public static final int camera1_dev_num = 0;
+    public static final int camera2_dev_num = 1;
 
     public static final int camera1_resolution_x = 640;
     public static final int camera1_resolution_y = 480;
