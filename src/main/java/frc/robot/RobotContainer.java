@@ -64,8 +64,6 @@ public class RobotContainer {
 
   }
 
-  //inline comment for camera
-
   public static double getTriggerOutput(XboxController controller) {
     return Math.pow(controller.getTriggerAxis(GenericHID.Hand.kRight) - controller.getTriggerAxis(GenericHID.Hand.kLeft), 3);
   }
