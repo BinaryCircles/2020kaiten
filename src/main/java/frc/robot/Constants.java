@@ -9,10 +9,12 @@ package frc.robot;
 
 public final class Constants {
 
-    // drivetrain
-    public static final int drive_fl = 5;
-    public static final int drive_fr = 1;
-    public static final int drive_bl = 4;
-    public static final int drive_br = 8;
+    public final class Drivetrain {
+        // drivetrain
+        public static final int drive_fl = 5;
+        public static final int drive_fr = 1;
+        public static final int drive_bl = 4;
+        public static final int drive_br = 8;
+    }
 
 }
