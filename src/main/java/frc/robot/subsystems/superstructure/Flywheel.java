@@ -28,8 +28,8 @@ public class Flywheel extends SubsystemBase {
   public Flywheel() {
 
     // instantiate motors
-    flywheelMain = new TalonSRX(Constants.FLYWHEEL_MAIN);
-    flywheelSecondary = new VictorSPX(Constants.FLYWHEEL_SECONDARY);
+    flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
+    flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
 
     // configure motor controllers
 		flywheelMain.configFactoryDefault();
@@ -45,25 +45,25 @@ public class Flywheel extends SubsystemBase {
     // set PIDF constants
 
 		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
-		flywheelMain.configNominalOutputForward(0, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.configNominalOutputReverse(0, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.configPeakOutputForward(1, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-        flywheelMain.configPeakOutputReverse(-1, Constants.FLYWHEEL_CONFIG_TIMEOUT);
+		flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
+		flywheelMain.configNominalOutputReverse(0, Constants.Flywheel.CONFIG_TIMEOUT);
+		flywheelMain.configPeakOutputForward(1, Constants.Flywheel.CONFIG_TIMEOUT);
+        flywheelMain.configPeakOutputReverse(-1, Constants.Flywheel.CONFIG_TIMEOUT);
 
     flywheelSecondary.follow(flywheelMain);
 
     // Set PIDF constants
-    flywheelMain.config_kF(Constants.kPIDLoopIdx, Constants.FLYWHEEL_kF, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.config_kP(Constants.kPIDLoopIdx, Constants.FLYWHEEL_kP, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.config_kI(Constants.kPIDLoopIdx, Constants.FLYWHEEL_kI, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.config_kD(Constants.kPIDLoopIdx, Constants.FLYWHEEL_kD, Constants.FLYWHEEL_CONFIG_TIMEOUT);
+    flywheelMain.config_kF(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kF, Constants.Flywheel.CONFIG_TIMEOUT);
+		flywheelMain.config_kP(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kP, Constants.Flywheel.CONFIG_TIMEOUT);
+		flywheelMain.config_kI(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kI, Constants.Flywheel.CONFIG_TIMEOUT);
+		flywheelMain.config_kD(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kD, Constants.Flywheel.CONFIG_TIMEOUT);
   }
 
   public void shoot() {
     // Set the flywheel's speed using the talon's built in PID controller
     // It requires it to be in ticks per 100 milliseconds
-    flywheelMain.set(ControlMode.Velocity, Constants.FLYWHEEL_SPEED * Constants.FLYWHEEL_TICKS_PER_ROTATION
-       * Constants.FLYWHEEL_SETPOINT_CONSTANT);
+    flywheelMain.set(ControlMode.Velocity, Constants.Flywheel.SPEED * Constants.Flywheel.TICKS_PER_ROTATION
+       * Constants.Flywheel.SETPOINT_CONSTANT);
   }
 
   public void stop() {
