@@ -128,5 +128,4 @@ public final class Constants {
         public static final int camera2_resolution_x = 640;
         public static final int camera2_resolution_y = 480;
 }
-
 }
