@@ -27,15 +27,25 @@ public class cameraSubSystem extends SubsystemBase {
 
   public cameraSubSystem() {
     //initilize camera
+<<<<<<< HEAD
     camera1 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera1_dev_num);
     camera2 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera2_dev_num);
+=======
+    camera1 = CameraServer.getInstance().startAutomaticCapture(Constants.camera1_dev_num);
+    camera2 = CameraServer.getInstance().startAutomaticCapture(Constants.camera2_dev_num);
+>>>>>>> 1f90ed1fdc41a7231cd668effa50dac7f3841290
 
     //initilize server
     server = CameraServer.getInstance().getServer();
 
     //set resolution for the two cameras
+<<<<<<< HEAD
     camera1.setResolution(Constants.camera.camera1_resolution_x,Constants.camera.camera1_resolution_y);
     camera2.setResolution(Constants.camera.camera2_resolution_x,Constants.camera.camera2_resolution_y);
+=======
+    camera1.setResolution(Constants.camera1_resolution_x,Constants.camera1_resolution_y);
+    camera2.setResolution(Constants.camera2_resolution_x,Constants.camera2_resolution_y);
+>>>>>>> 1f90ed1fdc41a7231cd668effa50dac7f3841290
 
     //when toggling between cameras doesnt turn the other camera's connect off
     camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
