@@ -119,8 +119,14 @@ public final class Constants {
     public static final int camera1_dev_num = 0;
     public static final int camera2_dev_num = 1;
 
-    public static final int camera1_resolution_x = 640;
-    public static final int camera1_resolution_y = 480;
-    public static final int camera2_resolution_x = 640;
-    public static final int camera2_resolution_y = 480;
+    public final class camera{
+        public static final int camera1_dev_num = 0;
+        public static final int camera2_dev_num = 1;
+
+        public static final int camera1_resolution_x = 640;
+        public static final int camera1_resolution_y = 480;
+        public static final int camera2_resolution_x = 640;
+        public static final int camera2_resolution_y = 480;
+}
+
 }
