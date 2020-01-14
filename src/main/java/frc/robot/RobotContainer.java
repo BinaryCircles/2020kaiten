@@ -29,6 +29,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     s_chassis = new Chassis();
+    s_climb = new V4BClimb();
 
     configureButtonBindings();
   }
