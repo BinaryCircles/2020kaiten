@@ -36,13 +36,13 @@ public class ShootFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    flywheel.shoot();
+    flywheel.enable();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    flywheel.stop();
+    flywheel.disable();
   }
 
   // Returns true when the command should end.

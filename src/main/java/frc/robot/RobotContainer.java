@@ -37,8 +37,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // create inline command to shoot/stop shooting
-    new JoystickButton(operatorController, XboxController.Button.kX.value).whenPressed(s_flywheel::shoot)
-            .whenReleased(s_flywheel::stop);
+    new JoystickButton(operatorController, XboxController.Button.kX.value).whenPressed(s_flywheel::enable)
+            .whenReleased(s_flywheel::disable);
 
 
   }

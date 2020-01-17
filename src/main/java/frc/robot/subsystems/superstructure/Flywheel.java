@@ -13,27 +13,30 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import frc.robot.Constants;
 
 /*
-  This is a closed-loop flywheel that uses two motor controllers
-  (a talon and a victor) and the WPIlib PID controller
-  as opposed to the Talon's built-in PID controller).
+   this will be re-written for the 4th time I'm calling it right now
 */
-public class Flywheel extends SubsystemBase {
+public class Flywheel extends PIDSubsystem {
 
   private final TalonSRX flywheelMain;
   private final VictorSPX flywheelSecondary;
-  private final PIDController pidController;
+
+  // Pretty sure these numbers are right but they probably aren't
+  private final SimpleMotorFeedforward m_MotorFeedforward =
+    new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kA);
+
   Encoder encoderMain;
   
   public Flywheel() {
+    super(new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD));
     // instantiate motors
     flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
-
-    // Set motor controll
+    
 		flywheelMain.configFactoryDefault();
 		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
 		flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
@@ -47,27 +50,21 @@ public class Flywheel extends SubsystemBase {
     encoderMain = new Encoder(Constants.Flywheel.ENCODER_A, 
       Constants.Flywheel.ENCODER_B, Constants.Flywheel.ENCODER_REVERSE_DIRECTION);
 
-    // Set PIDF constants
-    pidController = new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD);
-
-  }
-
-  public void shoot() {
-    // Set the flywheel's speed using the talon's built in PID controller
-    // It requires it to be in ticks per 100 milliseconds
-    flywheelMain.set(ControlMode.PercentOutput, 
-      pidController.calculate(encoderMain.getRate(), Constants.Flywheel.TARGET_SPEED) + Constants.Flywheel.kF);
-  }
-
-  public void stop() {
-    flywheelMain.set(ControlMode.Velocity, 0);
-    encoderMain.close();
+    // The first number here is a 0 for position tolerance, we want
+    // it to be zero
+    this.getController().setTolerance(0, Constants.Flywheel.ERROR_TOLERANCE);
+    this.setSetpoint(Constants.Flywheel.TARGET_SPEED);
+    
   }
 
   @Override
-  // this method is as empty as my DM's
-  public void periodic() {
+  protected void useOutput(double output, double setpoint) {
+    flywheelMain.set(ControlMode.PercentOutput, output + m_MotorFeedforward.calculate(setpoint));
+  }
 
+  @Override
+  protected double getMeasurement() {
+    return encoderMain.getRate();
   }
 
 }
