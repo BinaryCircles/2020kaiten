@@ -10,26 +10,30 @@ package frc.robot.subsystems.superstructure;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /*
-  For a good example on closed-loop control with the Talon,
-  see https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/VelocityClosedLoop/src/main/java/frc/robot/ 
+  This is a closed-loop flywheel that uses two motor controllers
+  (a talon and a victor) and the WPIlib PID controller
+  as opposed to the Talon's built-in PID controller).
 */
 public class Flywheel extends SubsystemBase {
 
-  // define variables
   private final TalonSRX flywheelMain;
   private final VictorSPX flywheelSecondary;
-  // constructor
+  private final PIDController pidController;
+  Encoder encoderMain;
+  
   public Flywheel() {
-
     // instantiate motors
     flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
 
-    // configure motor controllers
+    // Set motor controll
 		flywheelMain.configFactoryDefault();
 		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
 		flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
@@ -39,25 +43,29 @@ public class Flywheel extends SubsystemBase {
 
     flywheelSecondary.follow(flywheelMain);
 
+    // Encoder takes 2 ports
+    encoderMain = new Encoder(Constants.Flywheel.ENCODER_A, 
+      Constants.Flywheel.ENCODER_B, Constants.Flywheel.ENCODER_REVERSE_DIRECTION);
+
     // Set PIDF constants
-    flywheelMain.config_kF(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kF, Constants.Flywheel.CONFIG_TIMEOUT);
-		flywheelMain.config_kP(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kP, Constants.Flywheel.CONFIG_TIMEOUT);
-		flywheelMain.config_kI(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kI, Constants.Flywheel.CONFIG_TIMEOUT);
-		flywheelMain.config_kD(Constants.Flywheel.kPIDLoopIdx, Constants.Flywheel.kD, Constants.Flywheel.CONFIG_TIMEOUT);
+    pidController = new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD);
+
   }
 
   public void shoot() {
     // Set the flywheel's speed using the talon's built in PID controller
     // It requires it to be in ticks per 100 milliseconds
-    flywheelMain.set(ControlMode.Velocity, Constants.Flywheel.SPEED * Constants.Flywheel.TICKS_PER_ROTATION
-       * Constants.Flywheel.SETPOINT_CONSTANT);
+    flywheelMain.set(ControlMode.PercentOutput, 
+      pidController.calculate(encoderMain.getRate(), Constants.Flywheel.TARGET_SPEED) + Constants.Flywheel.kF);
   }
 
   public void stop() {
     flywheelMain.set(ControlMode.Velocity, 0);
+    encoderMain.close();
   }
 
   @Override
+  // this method is as empty as my DM's
   public void periodic() {
 
   }

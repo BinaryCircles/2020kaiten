@@ -21,17 +21,15 @@ public final class Constants {
         public static final int MAIN = 2;
         public static final int SECONDARY = 3;
 
-        // measured in rotations per minute
-        public static final int SPEED = 60;
+        // Ports for the encoder: Note that each
+        // encoder actually takes up 2 ports, so
+        // A and B are for the same encoder.
+        public static final int ENCODER_A = 1234;
+        public static final int ENCODER_B = 4321;
+        public static final boolean ENCODER_REVERSE_DIRECTION = false;
 
-        // We need this because the talon has different PID slots
-        public static final int kPIDLoopIdx = 0;
-        
-        // Don't try to tune these! These are constants that are
-        // stated in the documentation so that we can easily enter
-        // rotaitons per minute.
-        public static final int TICKS_PER_ROTATION = 4096;
-        public static final double SETPOINT_CONSTANT = 0.001667; // 100 milliseconds / 1 min
+        // measured in rotations per minute
+        public static final int TARGET_SPEED = 60;
 
         // PID Constants for closed loop flywheel
         public static final double kP = 1;
