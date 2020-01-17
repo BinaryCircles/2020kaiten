@@ -51,15 +51,13 @@ public class Flywheel extends PIDSubsystem {
     flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
 
-		flywheelMain.configFactoryDefault();
-
-    // set PIDF constants
+    flywheelMain.configFactoryDefault();
 
 		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
-		flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
-		flywheelMain.configNominalOutputReverse(0, Constants.Flywheel.CONFIG_TIMEOUT);
-		flywheelMain.configPeakOutputForward(1, Constants.Flywheel.CONFIG_TIMEOUT);
-        flywheelMain.configPeakOutputReverse(-1, Constants.Flywheel.CONFIG_TIMEOUT);
+    flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
+    flywheelMain.configNominalOutputReverse(0, Constants.Flywheel.CONFIG_TIMEOUT);
+    flywheelMain.configPeakOutputForward(1, Constants.Flywheel.CONFIG_TIMEOUT);
+    flywheelMain.configPeakOutputReverse(-1, Constants.Flywheel.CONFIG_TIMEOUT);
 
     flywheelSecondary.follow(flywheelMain);
 
