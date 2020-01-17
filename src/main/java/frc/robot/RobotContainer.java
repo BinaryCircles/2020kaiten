@@ -62,10 +62,6 @@ public class RobotContainer {
             .whenPressed(s_camera::set_camera2)
             .whenReleased(s_camera::set_camera1);
 
-    new JoystickButton(driveController, XboxController.Button.kX.value)
-            .whenPressed(s_camera::set_camera2)
-            .whenReleased(s_camera::set_camera1);
-
   }
 
   public static double getTriggerOutput(XboxController controller) {
@@ -119,7 +115,7 @@ public class RobotContainer {
             s_chassis::getWheelSpeeds,
             new PIDController(Constants.Drivetrain.kPVel, 0, 0),
             new PIDController(Constants.Drivetrain.kPVel, 0, 0)
-            
+
             // return the volts
             s_chassis::tankDriveVolts,
             s_chassis

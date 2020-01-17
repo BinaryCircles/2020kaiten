@@ -99,8 +99,9 @@ public final class Constants {
         public static final double kP = 1;
         public static final double kI = 0;
         public static final double kD = 0;
-        public static final double kF = 0;
+        public static final double kS = 0;
         public static final double kA = 0;
+        public static final double ERROR_TOLERANCE = 0;
         /**
          * Timeout value (in milliseconds) generally used in parameter configs
          * Non-zero to block the config until success, zero to skip checking

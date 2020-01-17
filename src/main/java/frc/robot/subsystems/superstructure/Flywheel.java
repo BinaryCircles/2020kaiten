@@ -13,10 +13,16 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import frc.robot.Constants;
 
 public class Flywheel extends SubsystemBase {
+
+/*
+   this will be re-written for the 4th time I'm calling it right now
+*/
+public class Flywheel extends PIDSubsystem {
 
   // define variables
   private final TalonSRX flywheelMain;
@@ -32,15 +38,20 @@ public class Flywheel extends SubsystemBase {
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
 
     // configure motor controllers
+    // Pretty sure these numbers are right but they probably aren't
+
+  private final SimpleMotorFeedforward m_MotorFeedforward =
+    new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kA);
+
+  Encoder encoderMain;
+
+  public Flywheel() {
+    super(new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD));
+    // instantiate motors
+    flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
+    flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
+
 		flywheelMain.configFactoryDefault();
-
-    // config the peak and nominal outputs ([-1, 1] represents [-100, 100]%)
-		flywheelMain.configNominalOutputForward(0, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.configNominalOutputReverse(0, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-		flywheelMain.configPeakOutputForward(1, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-    flywheelMain.configPeakOutputReverse(-1, Constants.FLYWHEEL_CONFIG_TIMEOUT);
-
-    flywheelSecondary.follow(flywheelMain);
 
     // set PIDF constants
 
@@ -73,6 +84,25 @@ public class Flywheel extends SubsystemBase {
   @Override
   public void periodic() {
 
+    // Encoder takes 2 ports
+    encoderMain = new Encoder(Constants.Flywheel.ENCODER_A,
+      Constants.Flywheel.ENCODER_B, Constants.Flywheel.ENCODER_REVERSE_DIRECTION);
+
+    // The first number here is a 0 for position tolerance, we want
+    // it to be zero
+    this.getController().setTolerance(0, Constants.Flywheel.ERROR_TOLERANCE);
+    this.setSetpoint(Constants.Flywheel.TARGET_SPEED);
+
+  }
+
+  @Override
+  protected void useOutput(double output, double setpoint) {
+    flywheelMain.set(ControlMode.PercentOutput, output + m_MotorFeedforward.calculate(setpoint));
+  }
+
+  @Override
+  protected double getMeasurement() {
+    return encoderMain.getRate();
   }
 
 }
