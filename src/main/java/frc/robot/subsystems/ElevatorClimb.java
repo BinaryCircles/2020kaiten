@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.controller.ArmFeedforward;
+import edu.wpi.first.wpilibj.controller.ElevatorFeedforward;
 import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
@@ -28,7 +29,7 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
     private double error;
     private double diffError;
     ProfiledPIDController controller;
-    private final ArmFeedforward climbArmFeedForward;
+    private final ElevatorFeedforward climbArmFeedForward;
 
     // constructor
     public ElevatorClimb()  {
@@ -50,7 +51,7 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
         climbArmEncoder = new Encoder(ClimbConstants.CLIMB_DEPLOY_DIO, ClimbConstants.CLIMB_DEPLOY_DIO2);
 
         // initialize feedforward
-        climbArmFeedForward = new ArmFeedforward(ClimbConstants.kS, ClimbConstants.kV, ClimbConstants.kA);
+        climbArmFeedForward = new ElevatorFeedforward(ClimbConstants.kS, ClimbConstants.kV, ClimbConstants.kA);
 
         // set dpp of encoder
         climbArmEncoder.setDistancePerPulse(ClimbConstants.DISTANCE_PER_PULSE);
