@@ -13,48 +13,44 @@ import frc.robot.Constants;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource.ConnectionStrategy;
-public class cameraSubSystem extends SubsystemBase {
-  /**
-   * Creates a new cameraSubSystem. 
-   */
+public class Camera extends SubsystemBase {
 
-  //uses two cameras that can be toggled between 
+  // uses two cameras that can be toggled between
   UsbCamera camera1;
   UsbCamera camera2;
 
-  //server that accepts input from the camera
+  // server that accepts input from the camera
   VideoSink server;
 
-  public cameraSubSystem() {
-    //initilize camera
+  public Camera() {
+    // initialize camera
     camera1 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera1_dev_num);
     camera2 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera2_dev_num);
 
-    //initilize server
+    // initialize server
     server = CameraServer.getInstance().getServer();
 
-    //set resolution for the two cameras
+    // set resolution for the two cameras
     camera1.setResolution(Constants.camera.camera1_resolution_x,Constants.camera.camera1_resolution_y);
     camera2.setResolution(Constants.camera.camera2_resolution_x,Constants.camera.camera2_resolution_y);
 
-    //when toggling between cameras doesnt turn the other camera's connect off
+    // when toggling between cameras doesn't turn the other camera's connect off
     camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
     camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
   }
 
-  //method to set camera1 on
+  // set camera1
   public void set_camera1(){
     server.setSource(camera1);
   }
 
-  //method to set camera2 on
+  // set camera2
   public void set_camera2(){
     server.setSource(camera2);
   }
 
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() { }
+  
 }
