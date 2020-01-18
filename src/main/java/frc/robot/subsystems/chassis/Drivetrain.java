@@ -11,19 +11,21 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
   // define variables
-  private final CANSparkMax front_left, back_left, front_right, back_right;
+  private CANSparkMax front_left, back_left, front_right, back_right;
   //private final WPI_TalonSRX front_left, front_right;
   //private final WPI_VictorSPX back_left, back_right;
-  private final CANSparkMaxLowLevel.MotorType brushless;
-  private final boolean driveInverted;
-  private final int currentLimitAmps;
-  private final DifferentialDrive differentialDrive;
+  private CANSparkMaxLowLevel.MotorType brushless;
+  private boolean driveInverted;
+  private int currentLimitAmps;
+  private DifferentialDrive differentialDrive;
+  public static DifferentialDriveKinematics driveKinematics;
 
   // constructor
   public Drivetrain() {
@@ -34,10 +36,10 @@ public class Drivetrain extends SubsystemBase {
     currentLimitAmps = 40;
 
     // instantiate motor controllers (spark maxes)
-    front_left = new CANSparkMax(Constants.Drivetrain.drive_fl, brushless);
-    back_left = new CANSparkMax(Constants.Drivetrain.drive_bl, brushless);
-    front_right = new CANSparkMax(Constants.Drivetrain.drive_fr, brushless);
-    back_right = new CANSparkMax(Constants.Drivetrain.drive_br, brushless);
+    front_left = new CANSparkMax(Constants.Drivetrain.DRIVE_FL, brushless);
+    back_left = new CANSparkMax(Constants.Drivetrain.DRIVE_BL, brushless);
+    front_right = new CANSparkMax(Constants.Drivetrain.DRIVE_FR, brushless);
+    back_right = new CANSparkMax(Constants.Drivetrain.DRIVE_BR, brushless);
 
     // victors/talons
     /*front_left = new WPI_TalonSRX(Constants.drive_fl);
@@ -46,6 +48,7 @@ public class Drivetrain extends SubsystemBase {
     //back_right = new WPI_VictorSPX(Constants.drive_br);*/
 
     differentialDrive = new DifferentialDrive(front_left, front_right);
+    driveKinematics = new DifferentialDriveKinematics(Constants.Drivetrain.trackWidth);
 
     // configure motor controllers
     back_left.follow(front_left);
@@ -61,10 +64,10 @@ public class Drivetrain extends SubsystemBase {
     back_left.setSafetyEnabled(false);
     back_right.setSafetyEnabled(false);*/
 
-    front_left.setSmartCurrentLimit(currentLimitAmps);
-    back_left.setSmartCurrentLimit(currentLimitAmps);
-    front_right.setSmartCurrentLimit(currentLimitAmps);
-    back_right.setSmartCurrentLimit(currentLimitAmps);
+    front_left.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    back_left.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    front_right.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    back_right.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
 
   }
 
