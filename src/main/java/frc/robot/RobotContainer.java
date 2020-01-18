@@ -47,6 +47,7 @@ public class RobotContainer {
   public RobotContainer() {
     s_chassis = new Chassis();
     s_flywheel = new Flywheel();
+    s_camera = new Camera();
 
     configureButtonBindings();
   }
