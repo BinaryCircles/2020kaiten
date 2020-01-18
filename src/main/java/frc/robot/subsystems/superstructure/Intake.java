@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 
 public class Intake extends SubsystemBase {
@@ -32,8 +33,12 @@ public class Intake extends SubsystemBase {
   }
 
   public void startVore() {
-    intakeArm.set(DoubleSolenoid.Value.kForward);
-    intake.set(Constants.INTAKE_SPEED);
+    if (!RobotContainer.s_indexer.indexerFull) {
+      intakeArm.set(DoubleSolenoid.Value.kForward);
+      intake.set(Constants.INTAKE_SPEED);
+    } else {
+      stopVore();
+    }
   }
 
   public void stopVore() {
