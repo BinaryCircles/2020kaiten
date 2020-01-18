@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Camera;
@@ -55,9 +57,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // create inline command to shoot/stop shooting
-    new JoystickButton(operatorController, XboxController.Button.kX.value)
-            .whenPressed(s_flywheel::shoot)
-            .whenReleased(s_flywheel::stop);
+    new JoystickButton(operatorController, XboxController.Button.kX.value
+            .whenPressed(new InstantCommand(s_flywheel::enable))
+            .whenReleased(new InstantCommand(s_flywheel::disable));
 
     new JoystickButton(driveController, XboxController.Button.kX.value)
             .whenPressed(s_camera::set_camera2)
