@@ -18,12 +18,14 @@ public final class Constants {
     }
 
     public final class Flywheel {
+        
+        // motors
         public static final int MAIN = 2;
         public static final int SECONDARY = 3;
 
-        // Ports for the encoder: Note that each
+        // ports for the encoder: note that each
         // encoder actually takes up 2 ports, so
-        // A and B are for the same encoder.
+        // A and B are for the same encoder
         public static final int ENCODER_A = 1234;
         public static final int ENCODER_B = 4321;
         public static final boolean ENCODER_REVERSE_DIRECTION = false;
@@ -31,7 +33,7 @@ public final class Constants {
         // measured in rotations per minute
         public static final int TARGET_SPEED = 60;
 
-        // PID Constants for closed loop flywheel
+        // PID Constants for flywheel
         public static final double kP = 1;
         public static final double kI = 0;
         public static final double kD = 0;
@@ -39,14 +41,14 @@ public final class Constants {
         public static final double kV = 0;
         public static final double kA = 0;
         public static final double ERROR_TOLERANCE = 0;
+
         /**
          * Timeout value (in milliseconds) generally used in parameter configs
          * Non-zero to block the config until success, zero to skip checking 
          */
         public static final int CONFIG_TIMEOUT = 30;
-    }
-    // flywheel
 
+    }
 
     // drivetrain current limiting
     public static final int CURRENT_LIMIT_AMPS_DRIVE = 40;

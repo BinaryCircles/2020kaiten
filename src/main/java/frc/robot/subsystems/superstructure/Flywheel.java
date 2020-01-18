@@ -20,6 +20,7 @@ import frc.robot.Constants;
 /*
    this will be re-written for the 4th time I'm calling it right now
 */
+
 public class Flywheel extends PIDSubsystem {
 
   private final TalonSRX flywheelMain;
@@ -32,12 +33,13 @@ public class Flywheel extends PIDSubsystem {
   
   public Flywheel() {
     super(new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD));
+
     // instantiate motors
     flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
     
     flywheelMain.configFactoryDefault();
-		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
+    /* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
     flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
     flywheelMain.configNominalOutputReverse(0, Constants.Flywheel.CONFIG_TIMEOUT);
     flywheelMain.configPeakOutputForward(1, Constants.Flywheel.CONFIG_TIMEOUT);
@@ -45,11 +47,11 @@ public class Flywheel extends PIDSubsystem {
 
     flywheelSecondary.follow(flywheelMain);
 
-    // Encoder takes 2 ports
+    // encoder takes 2 ports
     encoderMain = new Encoder(Constants.Flywheel.ENCODER_A, 
       Constants.Flywheel.ENCODER_B, Constants.Flywheel.ENCODER_REVERSE_DIRECTION);
 
-    // The first number here is a 0 for position tolerance, we want
+    // the first number here is a 0 for position tolerance, we want
     // it to be zero
     this.getController().setTolerance(0, Constants.Flywheel.ERROR_TOLERANCE);
     this.setSetpoint(Constants.Flywheel.TARGET_SPEED);

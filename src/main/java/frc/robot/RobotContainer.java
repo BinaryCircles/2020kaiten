@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -37,9 +38,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // create inline command to shoot/stop shooting
-    new JoystickButton(operatorController, XboxController.Button.kX.value).whenPressed(s_flywheel::enable)
-            .whenReleased(s_flywheel::disable);
-
+    new JoystickButton(operatorController, XboxController.Button.kX.value)
+            .whenPressed(new InstantCommand(s_flywheel::enable))
+            .whenReleased(new InstantCommand(s_flywheel::disable));
 
   }
 
