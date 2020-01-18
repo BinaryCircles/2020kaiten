@@ -11,17 +11,21 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
   // define variables
-  private final CANSparkMax front_left, back_left, front_right, back_right;
+  private CANSparkMax front_left, back_left, front_right, back_right;
   //private final WPI_TalonSRX front_left, front_right;
   //private final WPI_VictorSPX back_left, back_right;
-  private final boolean driveInverted;
-  private final DifferentialDrive differentialDrive;
+  private CANSparkMaxLowLevel.MotorType brushless;
+  private boolean driveInverted;
+  private int currentLimitAmps;
+  private DifferentialDrive differentialDrive;
+  public static DifferentialDriveKinematics driveKinematics;
 
   // constructor
   public Drivetrain() {
@@ -43,6 +47,7 @@ public class Drivetrain extends SubsystemBase {
     //back_right = new WPI_VictorSPX(Constants.drive_br);*/
 
     differentialDrive = new DifferentialDrive(front_left, front_right);
+    driveKinematics = new DifferentialDriveKinematics(Constants.Drivetrain.trackWidth);
 
     // configure motor controllers
     back_left.follow(front_left);
@@ -58,10 +63,10 @@ public class Drivetrain extends SubsystemBase {
     back_left.setSafetyEnabled(false);
     back_right.setSafetyEnabled(false);*/
 
-    front_left.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
-    back_left.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
-    front_right.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
-    back_right.setSmartCurrentLimit(Constants.CURRENT_LIMIT_AMPS_DRIVE);
+    front_left.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    back_left.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    front_right.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
+    back_right.setSmartCurrentLimit(Constants.Drivetrain.CURRENT_LIMIT);
 
   }
 
