@@ -30,20 +30,6 @@ public class Flywheel extends PIDSubsystem {
 
   private final PIDController pidController;
 
-  // constructor
-  public Flywheel() {
-
-    // instantiate motors
-    flywheelMain = new TalonSRX(Constants.Flywheel.MAIN);
-    flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
-
-    // configure motor controllers
-    // Pretty sure these numbers are right but they probably aren't
-
-  private final SimpleMotorFeedforward m_MotorFeedforward =
-    new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kA);
-
-  Encoder encoderMain;
 
   public Flywheel() {
     super(new PIDController(Constants.Flywheel.kP, Constants.Flywheel.kI, Constants.Flywheel.kD));
@@ -52,6 +38,11 @@ public class Flywheel extends PIDSubsystem {
     flywheelSecondary = new VictorSPX(Constants.Flywheel.SECONDARY);
 
     flywheelMain.configFactoryDefault();
+
+    private final SimpleMotorFeedforward m_MotorFeedforward =
+      new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kV, Constants.Flywheel.kA);
+
+    Encoder encoderMain;
 
 		/* Config the peak and nominal outputs ([-1, 1] represents [-100, 100]%) */
     flywheelMain.configNominalOutputForward(0, Constants.Flywheel.CONFIG_TIMEOUT);
