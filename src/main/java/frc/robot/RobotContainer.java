@@ -16,11 +16,14 @@ import frc.robot.subsystems.chassis.Chassis;
 
 public class RobotContainer {
 
+  // create subsystems
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Chassis s_chassis;
 
+  // create commands
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  // create joysticks
   public static final XboxController driveController = new XboxController(1);
 
   public RobotContainer() {
