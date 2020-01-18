@@ -29,6 +29,7 @@ import frc.robot.subsystems.Camera;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.chassis.Chassis;
+import frc.robot.subsystems.chassis.Drivetrain;
 import frc.robot.subsystems.superstructure.Flywheel;
 
 import java.util.List;
@@ -60,13 +61,13 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // create inline command to shoot/stop shooting
-    new JoystickButton(operatorController, XboxController.Button.kX.value
+    new JoystickButton(operatorController, XboxController.Button.kX.value)
             .whenPressed(new InstantCommand(s_flywheel::enable))
             .whenReleased(new InstantCommand(s_flywheel::disable));
 
     new JoystickButton(driveController, XboxController.Button.kX.value)
-            .whenPressed(s_camera::set_camera2)
-            .whenReleased(s_camera::set_camera1);
+            .whenPressed(new InstantCommand(s_camera::set_camera2))
+            .whenReleased(new InstantCommand(s_camera::set_camera1));
 
   }
 
@@ -86,7 +87,7 @@ public class RobotContainer {
 
     // sets voltage constraint so you dont over accelerate
     var voltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(Constants.Drivetrain.kS,
-            Constants.Drivetrain.kV, Constants.Drivetrain.kA), Constants.Drivetrain.driveKinematics,
+            Constants.Drivetrain.kV, Constants.Drivetrain.kA), Drivetrain.driveKinematics,
             Constants.Drivetrain.maxVoltage);
 
     // Create config for trajectory
@@ -94,7 +95,7 @@ public class RobotContainer {
             new TrajectoryConfig(Constants.Drivetrain.maxSpeedMetersPerSecond,
                     Constants.Drivetrain.maxAccelMetersPerSecondSquared)
                     // Add kinematics to ensure max speed is actually obeyed
-                    .setKinematics(Constants.Drivetrain.driveKinematics)
+                    .setKinematics(Drivetrain.driveKinematics)
                     // Apply the voltage constraint
                     .addConstraint(voltageConstraint);
 
@@ -117,7 +118,7 @@ public class RobotContainer {
             s_chassis::getPose,
             new RamseteController(Constants.Drivetrain.ramseteB, Constants.Drivetrain.ramseteZeta),
             new SimpleMotorFeedforward(Constants.Drivetrain.kS, Constants.Drivetrain.kV, Constants.Drivetrain.kA),
-            Constants.Drivetrain.driveKinematics,
+            Drivetrain.driveKinematics,
             s_chassis::getWheelSpeeds,
             new PIDController(Constants.Drivetrain.kPVel, 0, 0),
             new PIDController(Constants.Drivetrain.kPVel, 0, 0)
