@@ -24,10 +24,9 @@ public class Flywheel extends PIDSubsystem {
 
   private final TalonSRX flywheelMain;
   private final VictorSPX flywheelSecondary;
-
-  // Pretty sure these numbers are right but they probably aren't
+  
   private final SimpleMotorFeedforward m_MotorFeedforward =
-    new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kA);
+    new SimpleMotorFeedforward(Constants.Flywheel.kS, Constants.Flywheel.kV, Constants.Flywheel.kA);
 
   Encoder encoderMain;
   
