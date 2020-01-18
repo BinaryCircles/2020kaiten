@@ -20,7 +20,6 @@ public class RobotContainer {
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Chassis s_chassis;
-
   public static Camera s_camera;
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -29,16 +28,16 @@ public class RobotContainer {
 
   public RobotContainer() {
     s_chassis = new Chassis();
+    s_camera = new Camera();
 
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(driveController, XboxController.Button.kX.value).whenPressed(s_camera::set_camera2)
-    .whenReleased(s_camera::set_camera1);
+    new JoystickButton(driveController, XboxController.Button.kX.value)
+            .whenPressed(s_camera::set_camera2)
+            .whenReleased(s_camera::set_camera1);
   }
-
-  //inline comment for camera
 
   public static double getTriggerOutput(XboxController controller) {
     return Math.pow(controller.getTriggerAxis(GenericHID.Hand.kRight) - controller.getTriggerAxis(GenericHID.Hand.kLeft), 3);
