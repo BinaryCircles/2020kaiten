@@ -17,14 +17,14 @@ public final class Constants {
         public static final int drive_br = 8;
     }
 
-    public final class camera{
-        public static final int camera1_dev_num = 0;
-        public static final int camera2_dev_num = 1;
+    public final class Camera {
+        public static final int CAMERA1 = 0;
+        public static final int CAMERA2 = 1;
 
-        public static final int camera1_resolution_x = 640;
-        public static final int camera1_resolution_y = 480;
-        public static final int camera2_resolution_x = 640;
-        public static final int camera2_resolution_y = 480;
-}
+        public static final int CAMERA1_RES_X = 640;
+        public static final int CAMERA1_RES_Y = 480;
+        public static final int CAMERA2_RES_X = 640;
+        public static final int CAMERA2_RES_Y = 480;
+    }
     
 }

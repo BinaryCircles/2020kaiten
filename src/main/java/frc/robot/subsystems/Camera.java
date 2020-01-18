@@ -24,15 +24,15 @@ public class Camera extends SubsystemBase {
 
   public Camera() {
     // initialize camera
-    camera1 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera1_dev_num);
-    camera2 = CameraServer.getInstance().startAutomaticCapture(Constants.camera.camera2_dev_num);
+    camera1 = CameraServer.getInstance().startAutomaticCapture(Constants.Camera.CAMERA1);
+    camera2 = CameraServer.getInstance().startAutomaticCapture(Constants.Camera.CAMERA2);
 
     // initialize server
     server = CameraServer.getInstance().getServer();
 
     // set resolution for the two cameras
-    camera1.setResolution(Constants.camera.camera1_resolution_x,Constants.camera.camera1_resolution_y);
-    camera2.setResolution(Constants.camera.camera2_resolution_x,Constants.camera.camera2_resolution_y);
+    camera1.setResolution(Constants.Camera.CAMERA1_RES_X, Constants.Camera.CAMERA1_RES_Y);
+    camera2.setResolution(Constants.Camera.CAMERA2_RES_X, Constants.Camera.CAMERA2_RES_Y);
 
     // when toggling between cameras doesn't turn the other camera's connect off
     camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
@@ -52,5 +52,5 @@ public class Camera extends SubsystemBase {
 
   @Override
   public void periodic() { }
-  
+
 }
