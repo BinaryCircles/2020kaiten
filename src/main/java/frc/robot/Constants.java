@@ -9,12 +9,18 @@ package frc.robot;
 
 public final class Constants {
 
+    // drivetrain
     public final class Drivetrain {
-        // drivetrain
-        public static final int drive_fl = 5;
-        public static final int drive_fr = 1;
-        public static final int drive_bl = 4;
-        public static final int drive_br = 8;
+
+        // motors
+        public static final int DRIVE_FL = 5;
+        public static final int DRIVE_FR = 1;
+        public static final int DRIVE_BL = 4;
+        public static final int DRIVE_BR = 8;
+
+        // configuration
+        public static final int CURRENT_LIMIT = 40;
+
     }
 
     public final class Flywheel {
@@ -43,11 +49,26 @@ public final class Constants {
         public static final double ERROR_TOLERANCE = 0;
 
         /**
-         * Timeout value (in milliseconds) generally used in parameter configs
-         * Non-zero to block the config until success, zero to skip checking 
-         */
+        * Timeout value (in milliseconds) generally used in parameter configs
+        * Non-zero to block the config until success, zero to skip checking 
+        */
         public static final int CONFIG_TIMEOUT = 30;
 
+    }
+  
+    // camera
+    public final class Camera {
+      
+        // camera ids
+        public static final int CAMERA1 = 0;
+        public static final int CAMERA2 = 1;
+
+        // configuration
+        public static final int CAMERA1_RES_X = 640;
+        public static final int CAMERA1_RES_Y = 480;
+        public static final int CAMERA2_RES_X = 640;
+        public static final int CAMERA2_RES_Y = 480;
+      
     }
 
     // drivetrain current limiting
@@ -56,6 +77,5 @@ public final class Constants {
     // controller IDs
     public static final int DRIVE_CONTROLLER_PORT = 1;
     public static final int OPERATOR_CONTROLLER_PORT = 2;
-	
-
+    
 }
