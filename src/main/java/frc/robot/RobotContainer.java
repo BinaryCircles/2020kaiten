@@ -61,7 +61,7 @@ public class RobotContainer {
     // reverse indexer
     new JoystickButton(operatorController, XboxController.Button.kB.value)
             .whenPressed(new RunCommand(s_indexer::reverseIndexer, s_indexer))
-            .whenReleased(new RunCommand((s_indexer.stopIndexer(), s_indexer)));
+            .whenReleased(new RunCommand(s_indexer::stopIndexer, s_indexer));
 
   }
 
