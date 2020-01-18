@@ -31,13 +31,13 @@ public class Drivetrain extends SubsystemBase {
     // configuration constants
     brushless = CANSparkMaxLowLevel.MotorType.kBrushless;
     driveInverted = false;
-    currentLimitAmps = 40;
+    currentLimitAmps = Constants.Drivetrain.CURRENT_LIMIT;
 
     // instantiate motor controllers (spark maxes)
-    front_left = new CANSparkMax(Constants.Drivetrain.drive_fl, brushless);
-    back_left = new CANSparkMax(Constants.Drivetrain.drive_bl, brushless);
-    front_right = new CANSparkMax(Constants.Drivetrain.drive_fr, brushless);
-    back_right = new CANSparkMax(Constants.Drivetrain.drive_br, brushless);
+    front_left = new CANSparkMax(Constants.Drivetrain.DRIVE_FL, brushless);
+    back_left = new CANSparkMax(Constants.Drivetrain.DRIVE_BL, brushless);
+    front_right = new CANSparkMax(Constants.Drivetrain.DRIVE_FR, brushless);
+    back_right = new CANSparkMax(Constants.Drivetrain.DRIVE_BR, brushless);
 
     // victors/talons
     /*front_left = new WPI_TalonSRX(Constants.drive_fl);
