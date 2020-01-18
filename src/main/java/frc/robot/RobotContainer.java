@@ -35,14 +35,17 @@ import java.util.List;
 
 public class RobotContainer {
 
+  // create subsystems
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Chassis s_chassis;
   public static Flywheel s_flywheel;
 
   public static Camera s_camera;
 
+  // create commands
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  // create joysticks
   public static final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
   public static final XboxController operatorController = new XboxController(Constants.OPERATOR_CONTROLLER_PORT);
 

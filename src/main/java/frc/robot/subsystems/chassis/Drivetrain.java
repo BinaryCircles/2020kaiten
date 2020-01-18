@@ -31,10 +31,10 @@ public class Drivetrain extends SubsystemBase {
     driveInverted = false;
 
     // instantiate motor controllers (spark maxes)
-    front_left = new CANSparkMax(Constants.DRIVE_FL, brushless);
-    back_left = new CANSparkMax(Constants.DRIVE_BL, brushless);
-    front_right = new CANSparkMax(Constants.DRIVE_FR, brushless);
-    back_right = new CANSparkMax(Constants.DRIVE_BR, brushless);
+    front_left = new CANSparkMax(Constants.Drivetrain.DRIVE_FL, brushless);
+    back_left = new CANSparkMax(Constants.Drivetrain.DRIVE_BL, brushless);
+    front_right = new CANSparkMax(Constants.Drivetrain.DRIVE_FR, brushless);
+    back_right = new CANSparkMax(Constants.Drivetrain.DRIVE_BR, brushless);
 
     // victors/talons
     /*front_left = new WPI_TalonSRX(Constants.drive_fl);
