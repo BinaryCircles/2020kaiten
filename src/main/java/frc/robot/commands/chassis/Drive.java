@@ -38,7 +38,11 @@ public class Drive extends CommandBase {
     linearVelocity = RobotContainer.getTriggerOutput(driveController);
     angularVelocity = RobotContainer.getLeftJoystickAxis(driveController);
 
-    s_drive.curveDrive(linearVelocity, angularVelocity, driveController.getXButton());
+    // open loop method
+    //s_drive.curveDrive(linearVelocity, angularVelocity, driveController.getXButton());
+
+    // closed loop method
+    s_drive.closedCurveDrive(linearVelocity, angularVelocity, driveController.getXButton());
 
   }
 

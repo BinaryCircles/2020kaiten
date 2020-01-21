@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a8d3f6-4541-4316-9c57-d4b6bbd29e33" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/navx_java_3_1_400.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendordeps/LibCu.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendordeps/navx_frc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/2020kaiten.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/2020kaiten.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2020kaiten.iml" beforeDir="false" afterPath="$PROJECT_DIR$/2020kaiten.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/Drive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/Drive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/chassis/Drivetrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/chassis/Drivetrain.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +52,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Public/wpilib/2020/maven/com/ctre/phoenix/api-java/5.17.3/api-java-5.17.3.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Public/wpilib/2020/maven/com/kauailabs/navx/frc/navx-java/3.1.400/navx-java-3.1.400.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

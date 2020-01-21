@@ -27,6 +27,7 @@ public final class Constants {
         public static final double kA = 0;
 
         public static final double trackWidth = 0;
+        public static final double wheelRadius = 0;
 
         // ramsete constants, ramseteB and Zeta are in meters per second
         public static final int maxVoltage = 10;
@@ -39,6 +40,26 @@ public final class Constants {
 
         // kP velocity
         public static final double kPVel = 10;
+
+        // closed loop configuration
+        public static final double maxSpeed = 0;
+        public static final double maxAngularSpeed = 0;
+
+        public static final int leftEncoder_a = 5;
+        public static final int leftEncoder_b = 6;
+        public static final int rightEncoder_a = 7;
+        public static final int rightEncoder_b = 8;
+        public static final int encoderResolution = 4096;
+
+        // pid constants
+        public static final double left_kP = 0;
+        public static final double left_kI = 0;
+        public static final double left_kD = 0;
+
+        public static final double right_kP = 0;
+        public static final double right_kI = 0;
+        public static final double right_kD = 0;
+
     }
 
     // flywheel
@@ -97,6 +118,7 @@ public final class Constants {
 
     }
 
+    // controllers
     public static final int DRIVE_CONTROLLER_PORT = 1;
     public static final int OPERATOR_CONTROLLER_PORT = 2;
 
