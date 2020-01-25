@@ -20,18 +20,16 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.chassis.Chassis;
 import frc.robot.subsystems.chassis.Drivetrain;
 
 import java.util.List;
 
 public class Ramsete extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  public Chassis s_chassis;
+  public Drivetrain s_drivetrain;
 
-  public Ramsete(Chassis subsystem) {
-      s_chassis = subsystem;
+  public Ramsete(Drivetrain subsystem) {
+      s_drivetrain = subsystem;
   }
 
   // sets voltage constraint so you dont over accelerate
@@ -39,6 +37,7 @@ public class Ramsete extends CommandBase {
           Constants.Drivetrain.kV, Constants.Drivetrain.kA), Drivetrain.driveKinematics,
           Constants.Drivetrain.maxVoltage);
 
+  // configures trajectories
   TrajectoryConfig config =
           new TrajectoryConfig(Constants.Drivetrain.maxSpeedMetersPerSecond,
                   Constants.Drivetrain.maxAccelMetersPerSecondSquared)
@@ -47,6 +46,7 @@ public class Ramsete extends CommandBase {
                   // Apply the voltage constraint
                   .addConstraint(voltageConstraint);
 
+    // creates a new trajectory
   Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
           // Start at the origin facing the +X direction
           new Pose2d(0, 0, new Rotation2d(0)),
@@ -63,17 +63,17 @@ public class Ramsete extends CommandBase {
 
   RamseteCommand ramseteCommand = new RamseteCommand(
           exampleTrajectory,
-          s_chassis::getPose,
+          s_drivetrain::getPose,
           new RamseteController(Constants.Drivetrain.ramseteB, Constants.Drivetrain.ramseteZeta),
           new SimpleMotorFeedforward(Constants.Drivetrain.kS, Constants.Drivetrain.kV, Constants.Drivetrain.kA),
           Drivetrain.driveKinematics,
-          s_chassis::getWheelSpeeds,
+          s_drivetrain::getWheelSpeeds,
           new PIDController(Constants.Drivetrain.kPVel, 0, 0),
-          new PIDController(Constants.Drivetrain.kPVel, 0, 0)
+          new PIDController(Constants.Drivetrain.kPVel, 0, 0),
 
           // return the volts
-          s_chassis::tankDriveVolts,
-          s_chassis
+          s_drivetrain::tankDriveVolts,
+          s_drivetrain
   );
 
   // Called when the command is initially scheduled.

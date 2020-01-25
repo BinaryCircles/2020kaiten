@@ -11,6 +11,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ExampleCommand extends CommandBase {
+  ExampleSubsystem m_subsystem;
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
   public ExampleCommand(ExampleSubsystem subsystem) {

@@ -84,50 +84,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-
-    // sets voltage constraint so you dont over accelerate
-    var voltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(Constants.Drivetrain.kS,
-            Constants.Drivetrain.kV, Constants.Drivetrain.kA), Drivetrain.driveKinematics,
-            Constants.Drivetrain.maxVoltage);
-
-    // Create config for trajectory
-    TrajectoryConfig config =
-            new TrajectoryConfig(Constants.Drivetrain.maxSpeedMetersPerSecond,
-                    Constants.Drivetrain.maxAccelMetersPerSecondSquared)
-                    // Add kinematics to ensure max speed is actually obeyed
-                    .setKinematics(Drivetrain.driveKinematics)
-                    // Apply the voltage constraint
-                    .addConstraint(voltageConstraint);
-
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(
-                    new Translation2d(1, 1),
-                    new Translation2d(2, -1)
-            ),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            // Pass config
-            config
-    );
-
-    RamseteCommand ramseteCommand = new RamseteCommand(
-            exampleTrajectory,
-            s_chassis::getPose,
-            new RamseteController(Constants.Drivetrain.ramseteB, Constants.Drivetrain.ramseteZeta),
-            new SimpleMotorFeedforward(Constants.Drivetrain.kS, Constants.Drivetrain.kV, Constants.Drivetrain.kA),
-            Drivetrain.driveKinematics,
-            s_chassis::getWheelSpeeds,
-            new PIDController(Constants.Drivetrain.kPVel, 0, 0),
-            new PIDController(Constants.Drivetrain.kPVel, 0, 0)
-
-            // return the volts
-            s_chassis::tankDriveVolts,
-            s_chassis
-    );
-
-    return ramseteCommand.andThen(() -> s_chassis.tankDriveVolts(0,0));
+    return new InstantCommand();
   }
 }
