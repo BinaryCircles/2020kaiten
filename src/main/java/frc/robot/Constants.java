@@ -21,7 +21,7 @@ public final class Constants {
         // configuration
         public static final int CURRENT_LIMIT = 40;
 
-        // kS = volts; kV = seconds / meter; kA = seconds^2 / meter
+        // kS = volts; kV = seconds / meter; kA = seconds^2 / meter (need to characterize)
         public static final double kS = 0;
         public static final double kV = 0;
         public static final double kA = 0;
@@ -29,29 +29,30 @@ public final class Constants {
         public static final double trackWidth = 0;
         public static final double wheelRadius = 0;
 
-        // ramsete constants, ramseteB and Zeta are in meters per second
+        // ramsete constants, ramseteB and Zeta are in meters per second (need to tune)
         public static final int maxVoltage = 10;
         public static final double ramseteB = 2;
         public static final double ramseteZeta = 0.7;
 
-        // max speed / accel
+        // max speed / accel used in ramsete command (need to tune)
         public static final double maxSpeedMetersPerSecond = 69;
         public static final double maxAccelMetersPerSecondSquared = 420;
 
-        // kP velocity
+        // kP velocity (need to tune)
         public static final double kPVel = 10;
 
-        // closed loop configuration
+        // closed loop configuration used in Drivetrain file (need to tune)
         public static final double maxSpeed = 0;
         public static final double maxAngularSpeed = 0;
 
+        // ports for dt encoders
         public static final int leftEncoder_a = 5;
         public static final int leftEncoder_b = 6;
         public static final int rightEncoder_a = 7;
         public static final int rightEncoder_b = 8;
         public static final int encoderResolution = 4096;
 
-        // pid constants
+        // pid constants (need to tune)
         public static final double left_kP = 0;
         public static final double left_kI = 0;
         public static final double left_kD = 0;
