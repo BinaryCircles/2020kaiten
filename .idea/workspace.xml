@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a8d3f6-4541-4316-9c57-d4b6bbd29e33" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/libraries/navx_java_3_1_400.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendordeps/LibCu.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendordeps/navx_frc.json" afterDir="false" />
@@ -11,6 +12,11 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/Drive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/Drive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/chassis/Drivetrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/chassis/Drivetrain.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/Ramsete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +65,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="frc.robot.commands" />
       <recent name="frc.robot.commands.superstructure" />
       <recent name="frc.robot.subsystems.superstructure" />
       <recent name="frc.robot.subsystems.chassis" />
