@@ -9,21 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Ramsete;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Camera;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -43,6 +32,8 @@ public class RobotContainer {
 
   public static Camera s_camera;
 
+  public static Ramsete c_ramsete;
+
   // create commands
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
@@ -54,6 +45,8 @@ public class RobotContainer {
     s_chassis = new Chassis();
     s_flywheel = new Flywheel();
     s_camera = new Camera();
+
+    c_ramsete = new Ramsete(s_chassis.drivetrain);
 
     configureButtonBindings();
   }
