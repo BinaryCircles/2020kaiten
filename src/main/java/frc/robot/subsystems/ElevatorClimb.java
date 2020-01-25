@@ -89,9 +89,7 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
     }
 
     @Override
-    public void useOutput(double output, TrapezoidProfile.State setpoint) {
-
-    }
+    public void useOutput(double output, TrapezoidProfile.State setpoint) { }
 
     @Override
     public double getMeasurement() {
