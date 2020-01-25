@@ -57,6 +57,7 @@ public final class Constants {
         // climb arm lengths
         public static final double CLIMB_ARM_LENGTH_1 = 69;
         public static final double CLIMB_ARM_LENGTH_2 = 420;
-        public static final double CLIMB_ELEVATOR_LINEAR_SPEED = 0;
+        public static final double CLIMB_ELEVATOR_DISTANCE_PER_ROTATION = 0;
+
     }
 }

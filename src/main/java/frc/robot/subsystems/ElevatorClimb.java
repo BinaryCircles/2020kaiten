@@ -55,10 +55,13 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
 
         // set dpp of encoder
         climbArmEncoder.setDistancePerPulse(ClimbConstants.DISTANCE_PER_PULSE);
+        climbArmEncoder.reset();
 
         lastError = 0;
         error = 0;
         diffError = 0;
+
+        goToSetpoint(ClimbConstants.ARM_OFFSET);
     }
 
   /* Basic PID loop
@@ -73,7 +76,7 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
   } */
 
     public void calculateInput(double input) {
-        double output = (input/ClimbConstants.CLIMB_ELEVATOR_LINEAR_SPEED);
+        double output = (input/ClimbConstants.CLIMB_ELEVATOR_DISTANCE_PER_ROTATION);
         goToSetpoint(output);
     }
 
@@ -95,7 +98,7 @@ public class ElevatorClimb extends ProfiledPIDSubsystem {
         return climbArmEncoder.getDistance() + ClimbConstants.ARM_OFFSET;
     }
 
-
+    public void dropElevator() { goToSetpoint(ClimbConstants.ARM_OFFSET); }
 
     public void startDeployClimbArm() {
         deployTalon.set(ClimbConstants.DEPLOY_SPEED);

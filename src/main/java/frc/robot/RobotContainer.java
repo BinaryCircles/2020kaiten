@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ElevatorClimb;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.V4BClimb;
@@ -20,7 +21,7 @@ public class RobotContainer {
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Chassis s_chassis;
-  public static V4BClimb s_climb;
+  public static ElevatorClimb s_climb;
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
@@ -29,7 +30,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     s_chassis = new Chassis();
-    s_climb = new V4BClimb();
+    s_climb = new ElevatorClimb();
 
     configureButtonBindings();
   }
@@ -41,7 +42,8 @@ public class RobotContainer {
             .whenReleased(s_climb::stopWinch);
     new JoystickButton(operatorController, operatorController.getPOV(0)).whenPressed(() -> s_climb.calculateInput(5));
     new JoystickButton(operatorController, operatorController.getPOV(90)).whenPressed(() -> s_climb.calculateInput(4));
-    new JoystickButton(operatorController, operatorController.getPOV(180)).whenPressed(() -> s_climb.calculateInput(3));
+    new JoystickButton(operatorController, operatorController.getPOV(270)).whenPressed(() -> s_climb.calculateInput(3));
+    new JoystickButton(operatorController, operatorController.getPOV(180)).whenPressed(s_climb::dropElevator);
   }
 
   public static double getTriggerOutput(XboxController controller) {
